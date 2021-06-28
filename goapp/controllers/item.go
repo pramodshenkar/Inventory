@@ -93,3 +93,28 @@ func DeleteItem(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{"item": result})
 }
+
+func UpdateItem(c *gin.Context) {
+
+	item := models.Item{}
+
+	err := c.BindJSON(&item)
+
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(400, gin.H{"message": "Provide required details"})
+		c.Abort()
+		return
+	}
+
+	result, err := api.UpdateItem(item)
+
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(400, gin.H{"message": err})
+		c.Abort()
+		return
+	}
+	c.JSON(200, gin.H{"item": result})
+
+}

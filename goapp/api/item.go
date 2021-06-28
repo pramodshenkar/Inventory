@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -109,4 +110,34 @@ func DeleteItem(itemid string) (*mongo.DeleteResult, error) {
 
 	return result, nil
 
+}
+
+func UpdateItem(item models.Item) (*mongo.UpdateResult, error) {
+	filter := bson.D{primitive.E{Key: "itemcode", Value: item.ItemCode}}
+
+	updater := bson.D{primitive.E{Key: "$set", Value: bson.D{
+		{Key: "itemname", Value: item.ItemName},
+		{Key: "itemcode", Value: item.ItemCode},
+		{Key: "itemdescription", Value: item.ItemDescription},
+		{Key: "itemcategory", Value: item.ItemCategory},
+		{Key: "quantity", Value: item.Quantity},
+		{Key: "vender", Value: item.Vender},
+		{Key: "baseprice", Value: item.BasePrice},
+		{Key: "datecreated", Value: item.DateCreated},
+		{Key: "datemodified", Value: time.Now()},
+	}}}
+
+	fmt.Println(filter, updater)
+
+	client, err := connectionHelper.GetMongoClient()
+	if err != nil {
+		return nil, err
+	}
+	collection := client.Database(connectionHelper.DB).Collection(connectionHelper.ITEMS)
+
+	res, err := collection.UpdateOne(context.TODO(), filter, updater)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }
