@@ -1,0 +1,16 @@
+
+db.m_itemcategory.insertOne({
+    "itemcategoryname":"electronics"
+})
+
+db.m_itemcategory.insertOne({
+    "itemcategoryname":"stationary"
+})
+
+db.m_itemcategory.insertOne({
+    "itemcategoryname":"furniture"
+})
+
+db.m_itemcategory.insertOne({
+    "itemcategoryname":"hardware"
+})

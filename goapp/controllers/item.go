@@ -34,7 +34,7 @@ func AddItem(c *gin.Context) {
 }
 
 func GetAllItems(c *gin.Context) {
-	courses, err := api.GetAllItems()
+	items, err := api.GetAllItems()
 
 	if err != nil {
 		fmt.Println(err)
@@ -42,7 +42,7 @@ func GetAllItems(c *gin.Context) {
 		c.Abort()
 		return
 	}
-	c.JSON(200, gin.H{"items": courses})
+	c.JSON(200, gin.H{"items": items})
 }
 
 func GetItem(c *gin.Context) {

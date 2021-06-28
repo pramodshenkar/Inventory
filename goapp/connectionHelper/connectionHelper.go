@@ -16,6 +16,8 @@ const (
 	CONNECTIONSTRING = "mongodb://localhost:27017"
 	DB               = "test"
 	ITEMS            = "c_items"
+	ITEMCATEGORY     = "m_itemcategory"
+	VENDER           = "m_vendor"
 )
 
 func GetMongoClient() (*mongo.Client, error) {
