@@ -10,6 +10,7 @@ func main() {
 	router := gin.Default()
 
 	router.POST("/categories", controllers.GetAllItemCategories)
+	router.POST("/venders", controllers.GetAllVenders)
 
 	router.POST("/additem", controllers.AddItem)
 	router.POST("/items", controllers.GetAllItems)

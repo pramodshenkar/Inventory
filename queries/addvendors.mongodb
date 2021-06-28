@@ -1,0 +1,16 @@
+
+db.m_vendor.insertOne({
+    "vendername":"Syska"
+})
+
+db.m_vendor.insertOne({
+    "vendername":"Lexii"
+})
+
+db.m_vendor.insertOne({
+    "vendername":"Videocon"
+})
+
+db.m_vendor.insertOne({
+    "vendername":"Dell"
+})
