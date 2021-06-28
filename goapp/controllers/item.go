@@ -70,3 +70,26 @@ func GetItem(c *gin.Context) {
 	c.JSON(200, gin.H{"item": item})
 
 }
+
+func DeleteItem(c *gin.Context) {
+	var item struct {
+		ItemID string `json:"_id" bson:"_id"`
+	}
+
+	if c.BindJSON(&item) != nil {
+		fmt.Println("Provide required details for GetCoursesByID")
+		c.JSON(400, gin.H{"message": "Provide required details"})
+		c.Abort()
+		return
+	}
+
+	result, err := api.DeleteItem(item.ItemID)
+
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(400, gin.H{"message": err})
+		c.Abort()
+		return
+	}
+	c.JSON(200, gin.H{"item": result})
+}

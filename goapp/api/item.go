@@ -89,3 +89,24 @@ func GetItem(itemcode string) (models.Item, error) {
 
 	return item, nil
 }
+
+func DeleteItem(itemid string) (*mongo.DeleteResult, error) {
+	client, err := connectionHelper.GetMongoClient()
+	if err != nil {
+		return nil, err
+	}
+
+	collection := client.Database(connectionHelper.DB).Collection(connectionHelper.ITEMS)
+
+	objectID, _ := primitive.ObjectIDFromHex(itemid)
+
+	filter := bson.D{primitive.E{Key: "_id", Value: objectID}}
+
+	result, err := collection.DeleteOne(context.TODO(), filter)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+
+}

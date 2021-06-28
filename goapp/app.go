@@ -11,6 +11,7 @@ func main() {
 	router.POST("/additem", controllers.AddItem)
 	router.POST("/items", controllers.GetAllItems)
 	router.POST("/item", controllers.GetItem)
+	router.POST("/deleteitem", controllers.DeleteItem)
 
 	router.Run(":5000")
 
